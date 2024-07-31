@@ -1,21 +1,26 @@
 <script lang="ts">
+    import type { Vector2D, DrawArgs } from "./types";
+    
     export let imageSrc = "";
     let overlayCanvas: HTMLCanvasElement;
 
-    type Vector2D = {
-        x: number;
-        y: number;
-    };
-
-    type drawArgs = {
-        crossLength: number;
-        crossThickness: number;
-        lineThickness: number;
-        color: string;
-        topleftColor: string;
-    };
-
     let quadPoints: Vector2D[] = [];
+
+    export function hasQuads() {
+        return quadPoints.length >= 4;
+    }
+
+    export function getQuadPoints() {
+        return quadPoints;
+    }
+
+    export function loadImageFromSrc(src: string) {
+        quadPoints = [];
+        imageSrc = src;
+        if (!overlayCanvas)
+            overlayCanvas = document.createElement("canvas");
+        loadImageIntoCanvas();
+    }
 
     function loadImageIntoCanvas() {
         if (!imageSrc || !overlayCanvas) return;
@@ -27,6 +32,7 @@
                 overlayCanvas.width = img.width;
                 overlayCanvas.height = img.height;
                 ctx.drawImage(img, 0, 0); // Draw image onto canvas at (0,0)
+                console.log("Image loaded into canvas");
             }
         };
         img.src = imageSrc;
@@ -104,7 +110,7 @@
 
     function drawQuadPreview(
         quadPoints: Vector2D[],
-        drawConfig: drawArgs = {
+        drawConfig: DrawArgs = {
             crossLength: 20,
             crossThickness: 8,
             lineThickness: 8,
@@ -227,11 +233,6 @@
         } else {
             console.error("Could not get 2D context from overlay canvas.");
         }
-    }
-
-    $: if (imageSrc) {
-        overlayCanvas = document.createElement("canvas");
-        loadImageIntoCanvas();
     }
 </script>
 
