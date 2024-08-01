@@ -9,6 +9,8 @@ import ImageViewer from "../ImageViewer.svelte";
 
     let showPopup = false;
 
+    const processorApiUrl = import.meta.env.VITE_WB_PROCESSOR_API;
+
     function handleFileChange(event: any) {
         const target = event.target;
         const file = target.files ? target.files[0] : null;
@@ -86,12 +88,9 @@ import ImageViewer from "../ImageViewer.svelte";
 
         formData.append("quad_points", JSON.stringify(formPoints));
 
-        let response = await fetch("http://localhost:5000/transform", {
+        let response = await fetch(`${processorApiUrl}/api/whiteboard/process`, {
             method: "POST",
             body: formData,
-            headers: {
-                "Access-Control-Allow-Origin": "http://localhost:5173",
-            },
         });
 
         // downloadFileFromResponse(response)
