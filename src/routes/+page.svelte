@@ -9,7 +9,7 @@ import ImageViewer from "../ImageViewer.svelte";
 
     let showPopup = false;
 
-    const processorApiUrl = import.meta.env.VITE_WB_PROCESSOR_API;
+    const processorApiUrl = 'https://api.jackyoung.xyz' // import.meta.env.VITE_WB_PROCESSOR_API;
 
     function handleFileChange(event: any) {
         const target = event.target;
