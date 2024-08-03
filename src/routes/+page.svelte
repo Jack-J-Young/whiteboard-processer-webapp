@@ -88,7 +88,7 @@ import ImageViewer from "../ImageViewer.svelte";
 
         formData.append("quad_points", JSON.stringify(formPoints));
 
-        let response = await fetch(`${processorApiUrl}/api/whiteboard/process`, {
+        let response = await fetch(`${processorApiUrl}/whiteboard/process`, {
             method: "POST",
             body: formData,
         });
