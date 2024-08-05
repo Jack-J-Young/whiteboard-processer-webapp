@@ -1,6 +1,6 @@
 <script lang="ts">
     import DebugPopup from "../DebugPopup.svelte";
-import ImageViewer from "../ImageViewer.svelte";
+    import ImageViewer from "../ImageViewer.svelte";
     // import UIButtons from '../UIButtons.svelte';
     let imageViewer: ImageViewer;
 
@@ -10,6 +10,7 @@ import ImageViewer from "../ImageViewer.svelte";
     let showPopup = false;
 
     const processorApiUrl = 'https://api.jackyoung.xyz' // import.meta.env.VITE_WB_PROCESSOR_API;
+    // const processorApiUrl = 'https://localhost' // import.meta.env.VITE_WB_PROCESSOR_API;
 
     function handleFileChange(event: any) {
         const target = event.target;
@@ -91,6 +92,7 @@ import ImageViewer from "../ImageViewer.svelte";
         let response = await fetch(`${processorApiUrl}/whiteboard/process`, {
             method: "POST",
             body: formData,
+            
         });
 
         // downloadFileFromResponse(response)
